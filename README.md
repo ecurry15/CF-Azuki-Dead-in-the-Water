@@ -1,4 +1,4 @@
-# 🕵️‍♂️ Threat Hunt Report: Azuki Breach - Dead in the Water CF
+# 🕵️‍♂️ Threat Hunt Report: Azuki Breach CF
 <img width="440" height="810" alt="Azuki" src="https://github.com/user-attachments/assets/990cbaa6-3b4d-45b8-ab67-49646b289572" />
 
 

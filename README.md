@@ -10,15 +10,21 @@
 
 **What Happened:**  
 
-On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromised when an attacker accessed an IT admin VM by using stolen RDP credentials. A week later, ransom notes were found across every system.
+On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromised when an attacker accessed an IT admin VM by using stolen RDP credentials. A week later, the attacker moved laterally to a Linux backup server. They stole credentials, deleted backups, and disabled backup services to eliminate recovery options. They then deployed ransomware across Windows systems, blocked all recovery mechanisms, encrypted files, and left a ransom note on all systems.
 
 ---
 ## 🖥️ INCIDENT DETAILS
 ### **Timeline Overview**
 
-- **First Malicious Activity:** 19 November 2025 18:36:18.503997Z
-- **Last Observed Activity:** 22 November 2025 00:38:47.8327343Z
-- **Total Duration:** 54 hours 2 minutes
+- Attacker laterally moved from `10.1.0.108` to the Linux backup server (`10.1.0.189`) via SSH using the `backup-admin` account.  
+- Performed system discovery, enumerated users and scheduled jobs, and accessed stored credentials.  
+- Downloaded external tooling, deleted backup archives, and stopped/disabled cron to prevent recovery.  
+- Used `PsExec64.exe` to deploy and execute `silentlynx.exe` on Windows systems.  
+- Stopped backup and shadow copy services, terminated file-locking processes, deleted shadow copies, limited shadow storage, disabled Windows recovery, and removed the backup catalog.  
+- Established persistence via a registry autorun key and a scheduled task.  
+- Deleted the NTFS USN journal to hinder forensic investigation.  
+- Encrypted files and dropped the ransom note `SILENTLYNX_README.txt`.
+
 
 ### **Attack Overview**
 

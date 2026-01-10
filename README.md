@@ -104,15 +104,18 @@ DeviceProcessEvents
 
 ## :triangular_flag_on_post: Flag 6 – What command enumerated local accounts?
 
-**Finding**:  
+**Finding**:  `cat /etc/passwd` at `2025-11-24T14:16:08.673485Z`
 
 **Thoughts**: 
 
 **KQL Query**:
 ```
-
+DeviceProcessEvents
+| where DeviceName contains "azuki-backupsrv"
+| where ProcessCommandLine contains "/etc/passwd"
 ```
-<img />
+<img width="858" height="493" alt="image" src="https://github.com/user-attachments/assets/b80e88f8-713a-4206-a99e-a43b358150cc" />
+
 
 
 ---

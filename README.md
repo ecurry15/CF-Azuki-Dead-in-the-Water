@@ -29,21 +29,22 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 ### **Attack Overview**
 
 - **Affected Systems:** azuki-sl, azuki-adminPC, azuki-FS01, azuki-BackupSrv
-- **Attacker IP Address:** 88.97.178.12
-- **Investigation Tool:** Microsoft Defender for Endpoint (MDE)
+- **Comprimised Account:** backup-admin
+- **Investigation Tool:** Azure Log Analytics Workspace
   
 ## 🧬 MITRE ATT&CK Mapping (Attack Chain)
 
 | Tactic | Technique ID | Description |
 |-------|--------------|-------------|
-| **Execution (TA0002)** | T1059.001 | PowerShell was used to run the malicious script `wupdate.ps1`. |
-| **Persistence (TA0003)** | T1053.005 | A Scheduled Task was created to run the malicious payload. |
-| **Defense Evasion (TA0005)** | T1564.001 / T1036.008 / T1105 | Attacker used hidden directories, file-type masquerading, and abused `certutil.exe` to download tools. |
-| **Discovery (TA0007)** | T1016 | `arp -a` and `ipconfig /all` used to enumerate local network configuration. |
-| **Credential Access (TA0006)** | T1003.001 | Mimikatz was used for credential dumping. |
-| **Lateral Movement (TA0008)** | T1021.001 | `mstsc.exe /V:<IP>` used to attempt RDP lateral movement. |
-| **Command & Control (TA0011)** | T1071.001 | HTTPS (port 443) used for C2 to external IP. |
-| **Impact (TA0040)** | T1136.001 | Backdoor account `support` created for persistent access. |
+| **Execution (TA0002)** | T1204.002 | Ransomware payload `silentlynx.exe` was executed on Windows systems. |
+| **Persistence (TA0003)** | T1547.001 / T1053.005 | Attacker established persistence using a registry autorun key and a scheduled task. |
+| **Defense Evasion (TA0005)** | T1562.001 / T1070.004 | Security processes were terminated and the NTFS USN journal was deleted to hinder investigation. |
+| **Discovery (TA0007)** | T1083 / T1087.001 | Backup directories, files, scheduled jobs, and local user accounts were enumerated. |
+| **Credential Access (TA0006)** | T1552.001 | Credentials were accessed from unsecured files on the backup server. |
+| **Lateral Movement (TA0008)** | T1021.004 / T1021.002 | SSH was used to access the Linux backup server and PsExec was used to move laterally to Windows systems. |
+| **Command & Control (TA0011)** | T1105 | External tooling was downloaded to the backup server using `curl`. |
+| **Impact (TA0040)** | T1485 / T1489 / T1490 / T1486 | Backups were destroyed, services and recovery features were disabled, systems were encrypted, and a ransom note was dropped. |
+
 
 
 

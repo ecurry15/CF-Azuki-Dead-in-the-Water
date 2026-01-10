@@ -74,7 +74,6 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 DeviceProcessEvents
 | where DeviceName contains "azuki"
 | where ProcessCommandLine contains "10.1.0.189"
-
 ```
 <img width="921" height="477" alt="image" src="https://github.com/user-attachments/assets/5b8cb663-3840-457b-a5be-0c8442a7fdfd" />
 
@@ -83,20 +82,29 @@ DeviceProcessEvents
 ---
 ## :triangular_flag_on_post: Flag 4 & 5 – How did the attacker find Backup directory contents & backup archives?
 
-**Finding**: 
+**Finding**: the attacker used the `ls --color=auto -la /backups/` command followed by `find /backups -name *.tar.gz` at `2025-11-25T05:47:51.749736Z` 
 
 **Notes**:  
 
-**KQL Query**:
+**KQL Queries**:
 ```
+DeviceProcessEvents
+| where DeviceName contains "azuki-backupsrv"
+| where ProcessCommandLine has "ls"
+```
+```
+DeviceProcessEvents
+| where DeviceName contains "azuki-backupsrv"
+| where ProcessCommandLine has "find"
+| where ProcessCommandLine has "backups"
+```
+<img width="845" height="473" alt="image" src="https://github.com/user-attachments/assets/894ac939-e9a9-49a8-8af1-3f60f02bdf7d" />
 
-```
-<img  />
 ---
 
 ## :triangular_flag_on_post: Flag 6 – What command enumerated local accounts?
 
-**Finding**: 
+**Finding**:  
 
 **Thoughts**: 
 

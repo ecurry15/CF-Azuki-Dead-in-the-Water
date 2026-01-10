@@ -65,15 +65,19 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 
 ## :triangular_flag_on_post: Flag 1 - 3 – How was the Backup Server Accessed? 
 
-**Finding**: 
+**Finding**: `ssh.exe backup-admin@10.1.0.189` was used on `azuki-adminpc` to remote into `Azuki-backupsrv` at `2025-11-25T05:39:10.889728Z`
 
 **Thoughts**: 
 
 **KQL Query**:
 ```
+DeviceProcessEvents
+| where DeviceName contains "azuki"
+| where ProcessCommandLine contains "10.1.0.189"
 
 ```
-<img  />
+<img width="921" height="477" alt="image" src="https://github.com/user-attachments/assets/5b8cb663-3840-457b-a5be-0c8442a7fdfd" />
+
 
 
 ---

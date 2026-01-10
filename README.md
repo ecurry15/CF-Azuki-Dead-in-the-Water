@@ -214,45 +214,71 @@ DeviceProcessEvents
 
 **Finding**:  `Silentlynx.exe`
 
-**Notes**: This was discovered when running the previous query for flag 13 & 14. 
+**Notes**: This was discovered when running the previous query for flags 13 & 14. 
 
 ---
 ## :triangular_flag_on_post: Flag 16 & 17 – How did the attacker stop the shadow copy service and the backup engine?
 
-**Finding**:  
+**Finding**:  The attacker ran  `"net" stop VSS /y` and `"net" stop wbengine /y` at `2025-11-25T06:04:53.4247108Z`
 
 **Thoughts**:
 
 
 **KQL Query**:
 ```
-
+DeviceProcessEvents
+| where DeviceName contains "azuki"
+| where FileName contains "net"
+| where ProcessCommandLine contains "stop VSS"
 ```
-<img  />
+```
+DeviceProcessEvents
+| where DeviceName contains "azuki"
+| where ProcessCommandLine contains "WBENGINE"
+```
+<img width="888" height="487" alt="image" src="https://github.com/user-attachments/assets/3d68cffb-dd1e-4e86-ae2d-744ea010d890" />
+
 
 
 ## :triangular_flag_on_post: Flag 18 – What command terminated processes to unlock files?
 
-**Finding**: 
+**Finding**: `taskkill /F /IM sqlservr.exe` at `2025-11-25T06:04:57.2122964Z`
 
 **KQL Query**:
 ```
+DeviceProcessEvents
+| where DeviceName contains "azuki"
+| where ProcessCommandLine contains "taskkill"
 ```
-<img  />
+<img width="970" height="480" alt="image" src="https://github.com/user-attachments/assets/45ef5f68-f92c-4071-9319-6d07cac65599" />
+
 ---
 
 ## :triangular_flag_on_post: Flag 19 - 22 – How did the attacker inhibit system recovery?
 
-**Finding**: 
+**Finding**: The attacker ran `vssadmin.exe delete shadows /all /quiet` to delete recovery points. Next, they ran `vssadmin.exe resize shadowstorage /for=C: /on=C: /maxsize=401MB`, which limited the recovery storage size. Finally, they ran `"bcdedit.exe" /set -encodedCommand ZABlAGYAYQB1AGwAdAA= recoveryenabled No `, when Base64 decoded, the command reads `bcdedit /set {default} recoveryenabled No`. This final command disabled system recovery.
 
-**Commands Used**:
 
 **Thoughts**:
 
 **KQL Query**:
 ```
+DeviceProcessEvents
+| where DeviceName contains "azuki"
+| where ProcessCommandLine contains "vssadmin.exe"
 ```
-<img  />
+```
+DeviceProcessEvents
+| where DeviceName contains "azuki"
+| where ProcessCommandLine contains "bcdedit.exe"
+```
+```
+DeviceProcessEvents
+| where DeviceName contains "azuki"
+| where ProcessCommandLine contains "wbadmin"
+```
+<img width="905" height="446" alt="image" src="https://github.com/user-attachments/assets/ccddea8a-6c34-4d62-a8a9-b6ffbc59374d" />
+
 ---
 ## :triangular_flag_on_post: Flag 23 & 24 – How did the attacker establish persistence? 
 

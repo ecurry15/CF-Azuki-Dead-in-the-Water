@@ -254,14 +254,6 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 
 ---
 
-### 🔹 **IP Addresses**
-| Type | Address |
-|------|---------|
-| Attacker IP | **88.97.178.12** |
-| C2 Server | **78.141.196.6** |
-| Download Server | **78.141.196.6** |
-| Lateral Movement Target | **10.1.0.188** |
-
 ### 🔹 **File Hashes**
 | File | SHA256 |
 |------|--------|
@@ -275,11 +267,8 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 | Compromised | **kenji.sato** |
 | Attacker-Created | **support** |
 
-### 🔹 **Domains**
-- **discord.com**
-
 ---
 
 **Report Completed By:** Edward Campbell
 
-**Date:** 25 November 2025
+**Date:** 7 January 2025

@@ -196,28 +196,25 @@ DeviceProcessEvents
 
 ## :triangular_flag_on_post: Flag 13 & 14 – What tool did the attacker use to execute commands on remote systems?
 
-**Finding**:
+**Finding**: The attacker ran `PsExec64.exe" \\10.1.0.102 -u kenji.sato -p ********** -c -f C:\Windows\Temp\cache\silentlynx.exe` at `2025-11-25T06:03:47.8997504Z`.
 
-**Command Used**: 
+**Tool Used**: `PsExec64.exe`
 
 
 **KQL Query**:
 ```
-
+DeviceProcessEvents
+| where DeviceName contains "azuki"
+| where FileName contains "PsExec"
 ```
-<img />
+<img width="976" height="472" alt="image" src="https://github.com/user-attachments/assets/17c051fc-3455-4da1-b501-1de7b11432c9" />
 
 ---
 ## :triangular_flag_on_post: Flag 15 – What payload was deployed?
 
-**Finding**:  
+**Finding**:  `Silentlynx.exe`
 
-**Commands Used**:
-
-**KQL Queries**:
-```
-```
-<img />
+**Notes**: This was discovered when running the previous query for flag 13 & 14. 
 
 ---
 ## :triangular_flag_on_post: Flag 16 & 17 – How did the attacker stop the shadow copy service and the backup engine?

@@ -282,18 +282,28 @@ DeviceProcessEvents
 ---
 ## :triangular_flag_on_post: Flag 23 & 24 – How did the attacker establish persistence? 
 
-**Finding**: 
+**Finding**: The attacker created a registry autorun entry under the name `WindowsSecurityHealth` which points to the malicious executable `silentlynx.exe`. Then created a scheduled task `Microsoft\Windows\Security\SecurityHealthService` at `2025-11-25T06:07:09.8191737Z`
 
-**Command Used**: 
+**Registry Key**: `HKEY_CURRENT_USER\S-1-5-21-3215208035-517803886-2772267501-500\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
 
 **KQL Query**:
 ```
+DeviceRegistryEvents
+| where DeviceName contains "azuki"
+| where RegistryKey contains "CurrentVersion"
+| where RegistryKey contains "Run"
 ```
-<img  />
+```
+DeviceProcessEvents
+| where DeviceName contains "azuki"
+| where ProcessCommandLine contains "schtasks"
+```
+<img width="1037" height="420" alt="image" src="https://github.com/user-attachments/assets/6721d9b2-a613-45fe-9460-9300c615d5e7" />
+
 ---
 ## :triangular_flag_on_post: Flag 25 – What command deleted forensic evidence?
 
-**Finding**:
+**Finding**: 
 **KQL Query**:
 ```
 

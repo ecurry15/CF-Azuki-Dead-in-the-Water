@@ -262,15 +262,27 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 ### 🔹 **File Hashes**
 | File | SHA256 |
 |------|--------|
-| **svchost.exe** | `729214e56d3c54956ce9c2d93b238563bcedc8b80a5ca0b8e7636602d9c712d5` |
-| **mm.exe** | `61c0810a23580cf492a6ba4f7654566108331e7a4134c968c2d6a05261b2d8a1` |
-| **export-data.zip** | `7fea3a7e71c3a493effd91ff9084d602857954c96fdc04e022415069d39bef2e` |
+| **SILENTLYNX_README.txt** | `ba9ee9747a60b34e6099ceb2f51a95b748a4f34d2114b5171756e8ae55f688ec` |
+| **silentlynx.exe** | `edfae1a69522f87b12c6dac3225d930e4848832e3c551ee1e7d31736bf4525ef` |
+| **PsExec64.exe** | `0ff6f2c94bc7e2833a5f7e16de1622e5dba70396f31c7d5f56381870317e8c46` |
+| **destroy.7z** | `aca992dba6da014cd5baaa739624e68362c8930337f3a547114afdbd708d06a4` |
 
 ### 🔹 **Accounts**
 | Type | Username |
 |------|----------|
 | Compromised | **kenji.sato** |
 | Attacker-Created | **support** |
+
+### 🔹 **Ip addresses**
+| System | IP |
+|------|----------|
+| 1st connection to Backup sever  | **10.1.0.108** |
+| Backup sever  | **10.1.0.189** |
+| Windows Target  | **10.1.0.102** |
+
+### 🔹 **Ransom Note**
+
+<img width="505" height="593" alt="note" src="https://github.com/user-attachments/assets/23de8a0b-b05b-42a4-96c8-2afd29426910" />
 
 ---
 

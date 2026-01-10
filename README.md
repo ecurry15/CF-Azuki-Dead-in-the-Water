@@ -16,7 +16,7 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 ## 🖥️ INCIDENT DETAILS
 ### **Timeline Overview**
 
-## November 25, 2025
+#### November 25, 2025
 | Time (UTC) | Event |
 |------------|-------|
 | 05:39:10 | Attacker laterally moved from `10.1.0.108` to the Linux backup server (`10.1.0.189`) via SSH using the `backup-admin` account. |

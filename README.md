@@ -348,12 +348,6 @@ DeviceFileEvents
 | **PsExec64.exe** | `0ff6f2c94bc7e2833a5f7e16de1622e5dba70396f31c7d5f56381870317e8c46` |
 | **destroy.7z** | `aca992dba6da014cd5baaa739624e68362c8930337f3a547114afdbd708d06a4` |
 
-### 🔹 **Accounts**
-| Type | Username |
-|------|----------|
-| Compromised | **kenji.sato** |
-| Attacker-Created | **support** |
-
 ### 🔹 **Ip addresses**
 | System | IP |
 |------|----------|

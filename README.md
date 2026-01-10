@@ -300,29 +300,38 @@ DeviceProcessEvents
 ```
 <img width="1037" height="420" alt="image" src="https://github.com/user-attachments/assets/6721d9b2-a613-45fe-9460-9300c615d5e7" />
 
----
+---  
+
 ## :triangular_flag_on_post: Flag 25 – What command deleted forensic evidence?
 
-**Finding**: 
+**Finding**: ` "fsutil.exe" usn deletejournal /D C:`  `at 2025-11-25T06:10:04.9141148Z`
+
 **KQL Query**:
 ```
-
+DeviceProcessEvents
+| where DeviceName contains "azuki"
+| where ProcessCommandLine contains "delete"
 ```
-<img/>
+<img width="880" height="477" alt="image" src="https://github.com/user-attachments/assets/b0748948-dca4-4424-903d-1e6ad96e30ab" />
+
 
 ---
 
 ## :triangular_flag_on_post: Flag 26 – What is the ransom note filename?
 
-**Finding**: 
+**Finding**: SILENTLYNX_README.txt
 
-**Command Used**: 
+**Thoughts**: 
 
 
 **KQL Query**:
 ```
+DeviceFileEvents
+| where DeviceName contains "azuki"
+| where FileName contains "lynx"
 ```
-<img/>
+<img width="1042" height="496" alt="image" src="https://github.com/user-attachments/assets/8011137a-369e-4533-9ab3-1dd52538be71" />
+
 ---
 
 ## **APPENDIX**

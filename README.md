@@ -17,21 +17,16 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 ### **Timeline Overview**
 
 ## November 25, 2025
-- **05:39:10 UTC** — Attacker laterally moved from `10.1.0.108` to the Linux backup server (`10.1.0.189`) via SSH using the `backup-admin` account.
-
-- **05:45:34 UTC** — External tooling was downloaded, backup archives were deleted, and `cron` was stopped and disabled to prevent future backups.
-
-- **05:47:02 UTC** — Backup and shadow copy services were stopped, file-locking processes were terminated, all shadow copies were deleted, shadow storage was limited, Windows recovery was disabled, and the backup catalog was removed.
-
-- **05:47:51 UTC** — System discovery was performed, local users and scheduled jobs were enumerated, and stored credentials were accessed.
-
-- **05:58:35 UTC** — `PsExec64.exe` was used to deploy and execute the ransomware payload `silentlynx.exe` on Windows systems.
-
-- **06:05:01 UTC** — Ransom note `SILENTLYNX_README.txt` was dropped, confirming successful encryption.
-
-- **06:07:09 UTC** — Persistence was established via a registry autorun key and a scheduled task.
-
-- **06:10:04 UTC** — The NTFS USN journal was deleted to hinder forensic investigation.
+| Time (UTC) | Event |
+|------------|-------|
+| 05:39:10 | Attacker laterally moved from `10.1.0.108` to the Linux backup server (`10.1.0.189`) via SSH using the `backup-admin` account. |
+| 05:45:34 | External tooling was downloaded, backup archives were deleted, and `cron` was stopped and disabled to prevent future backups. |
+| 05:47:02 | Backup and shadow copy services were stopped, file-locking processes were terminated, all shadow copies were deleted, shadow storage was limited, Windows recovery was disabled, and the backup catalog was removed. |
+| 05:47:51 | System discovery was performed, local users and scheduled jobs were enumerated, and stored credentials were accessed. |
+| 05:58:35 | `PsExec64.exe` was used to deploy and execute the ransomware payload `silentlynx.exe` on Windows systems. |
+| 06:05:01 | Ransom note `SILENTLYNX_README.txt` was dropped, confirming successful encryption. |
+| 06:07:09 | Persistence was established via a registry autorun key and a scheduled task. |
+| 06:10:04 | The NTFS USN journal was deleted to hinder forensic investigation. |
 
 
 

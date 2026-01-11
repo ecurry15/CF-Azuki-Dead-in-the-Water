@@ -107,7 +107,7 @@ DeviceProcessEvents
 
 **Finding**:  `cat /etc/passwd` at `2025-11-24T14:16:08.673485Z`
 
-**Thoughts**: Looking at the Mitre technique T1087.001 "Account Discovery", I found that `/etc/passwd` can be used to enumerate through local users.
+**Thoughts**: Looking at the Mitre technique `T1087.001` (Account Discovery), I found that `/etc/passwd` can be used to enumerate through local users.
 
 **KQL Query**:
 ```

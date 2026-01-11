@@ -246,7 +246,7 @@ DeviceProcessEvents
 
 ## :triangular_flag_on_post: Flag 18 – What command terminated processes to unlock files?
 
-**Finding**: `taskkill /F /IM sqlservr.exe` at `2025-11-25T06:04:57.2122964Z`
+**Finding**: `taskkill /F /IM sqlservr.exe` at `2025-11-25T06:04:57.2122964Z`  
 
 **KQL Query**:
 ```
@@ -262,8 +262,7 @@ DeviceProcessEvents
 
 **Finding**: The attacker ran `vssadmin.exe delete shadows /all /quiet` to delete recovery points. Next, they ran `vssadmin.exe resize shadowstorage /for=C: /on=C: /maxsize=401MB`, which limited the recovery storage size. Finally, they ran `"bcdedit.exe" /set -encodedCommand ZABlAGYAYQB1AGwAdAA= recoveryenabled No `, when Base64 decoded, the command reads `bcdedit /set {default} recoveryenabled No`. This final command disabled system recovery.
 
-
-**Thoughts**:
+**Thoughts**: I discovered `vssadmin.exe`, `bcdedit.exe`, and `wbadmin` all from the Mitre article on ID: T1490 (Inhibit System Recovery).
 
 **KQL Query**:
 ```
@@ -288,7 +287,9 @@ DeviceProcessEvents
 
 **Finding**: The attacker created a registry autorun entry under the name `WindowsSecurityHealth` which points to the malicious executable `silentlynx.exe`. Then created a scheduled task `Microsoft\Windows\Security\SecurityHealthService` at `2025-11-25T06:07:09.8191737Z`
 
-**Registry Key**: `HKEY_CURRENT_USER\S-1-5-21-3215208035-517803886-2772267501-500\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
+**Registry Key**: `HKEY_CURRENT_USER\S-1-5-21-3215208035-517803886-2772267501-500\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`  
+
+**Thoughts**: Looking at Mitre ID: T1547.001 (Boot or Logon Autostart Execution), I discovered that `HKEY_C_U\Software\...\CurrentVersion\Run` and `HKEY_L_M\Software\...\CurrentVersion\Run` are default Windows run keys. I wanted to query for any registry edits that included `CurrentVersion\Run`. Next, I queried for any commands ran that included `schtasks`.
 
 **KQL Query**:
 ```
@@ -325,7 +326,7 @@ DeviceProcessEvents
 
 **Finding**: SILENTLYNX_README.txt
 
-**Thoughts**: 
+**Thoughts**: Based on the 
 
 
 **KQL Query**:

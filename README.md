@@ -289,7 +289,7 @@ DeviceProcessEvents
 
 **Registry Key**: `HKEY_CURRENT_USER\S-1-5-21-3215208035-517803886-2772267501-500\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`  
 
-**Thoughts**: Looking at Mitre ID: T1547.001 (Boot or Logon Autostart Execution), I discovered that `HKEY_C_U\Software\...\CurrentVersion\Run` and `HKEY_L_M\Software\...\CurrentVersion\Run` are default Windows run keys. I wanted to query for any registry edits that included `CurrentVersion\Run`. Next, I queried for any commands ran that included `schtasks`.
+**Thoughts**: Looking at Mitre ID: `T1547.001` (Boot or Logon Autostart Execution), I found that `HKEY_C_U\Software\...\CurrentVersion\Run` and `HKEY_L_M\Software\...\CurrentVersion\Run` are default Windows run keys. I wanted to query for any registry edits that included `CurrentVersion\Run`. Next, I queried for any commands ran that included `schtasks`.
 
 **KQL Query**:
 ```

@@ -10,7 +10,7 @@
 
 **What Happened:**  
 
-On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromised when an attacker accessed an IT admin VM by using stolen RDP credentials. A week later, the attacker moved laterally to a Linux backup server. They stole credentials, deleted backups, and disabled backup services to eliminate recovery options. They then deployed ransomware across Windows systems, blocked all recovery mechanisms, encrypted files, and left a ransom note on all systems.
+On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromised when an attacker accessed an IT admin VM by using stolen RDP credentials. A week later, the attacker moved laterally to a Linux backup server. They stole credentials, deleted backups, and disabled backup services to eliminate recovery options. They then deployed ransomware across Windows systems, blocked all recovery mechanisms, and left a ransom note on all systems.
 
 ---
 ## 🖥️ INCIDENT DETAILS

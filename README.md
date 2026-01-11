@@ -85,7 +85,7 @@ DeviceProcessEvents
 
 **Finding**: the attacker used the `ls --color=auto -la /backups/` command followed by `find /backups -name *.tar.gz` at `2025-11-25T05:47:51.749736Z` 
 
-**Thoughts**:  The `ls` command in Linux is used to list the contents of a directory. I first wanted to see if and where it was used. The `find` command in Linux is used to search for files in a directory. I combined it with the string `backups` to see if the attacker tried to find files in a backups directory.
+**Thoughts**:  The `ls` command in Linux is used to list the contents of a directory. I first wanted to see if and where it was used. The `find` command in Linux is used to search for specific files in a directory. I combined it with the string `backups` to see if the attacker tried to find files in a backups directory.
 
 **KQL Queries**:
 ```

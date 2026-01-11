@@ -4,7 +4,7 @@
 
 **Analyst:** Edward Campbell  
 **Investigation Date:** 7-January-2026  
-**Incident Date:** 25-November-2025  
+**Incident Date:** 27-November-2025  
 
 ## 🎯 EXECUTIVE SUMMARY
 

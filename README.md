@@ -326,7 +326,7 @@ DeviceProcessEvents
 
 **Finding**: SILENTLYNX_README.txt
 
-**Thoughts**: Based on the 
+**Thoughts**: On the ransom note, it is written that the report is from the `SilentLynx` team and that the file extension is `.lynx`. I decided to query for any files with "lynx". I figured this would show any files that had either SILENTLYNX as the name or had the .lynx file extension.
 
 
 **KQL Query**:

@@ -262,7 +262,7 @@ DeviceProcessEvents
 
 **Finding**: The attacker ran `vssadmin.exe delete shadows /all /quiet` to delete recovery points. Next, they ran `vssadmin.exe resize shadowstorage /for=C: /on=C: /maxsize=401MB`, which limited the recovery storage size. Finally, they ran `"bcdedit.exe" /set -encodedCommand ZABlAGYAYQB1AGwAdAA= recoveryenabled No `, when Base64 decoded, the command reads `bcdedit /set {default} recoveryenabled No`. This final command disabled system recovery.
 
-**Thoughts**: I discovered `vssadmin.exe`, `bcdedit.exe`, and `wbadmin` all from the Mitre article on ID: T1490 (Inhibit System Recovery).
+**Thoughts**: I discovered `vssadmin.exe`, `bcdedit.exe`, and `wbadmin` all from the Mitre article on ID: `T1490` (Inhibit System Recovery).
 
 **KQL Query**:
 ```

